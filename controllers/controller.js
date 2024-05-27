@@ -1,15 +1,19 @@
 const Enquiry = require('../models/enquiry');
 const Services = require('../models/services');
+const Testimonial = require('../models/testimonial');
 const Gallery = require('../models/gallery');
 const Blog = require('../models/blog');
 const mailer = require('../controllers/mailcontroller');
 
 exports.index = async (req, res) => {
     const services = await Services.find();
-    res.render('index', { service: services });
+    const blog = await Blog.find();
+    const testimonial = await Testimonial.find();
+    res.render('index', { service: services,blog,testimonial });
 }
 exports.aboutus = async (req, res) => {
-    res.render('about');
+    const services = await Services.find();
+    res.render('about',{services});
 }
 exports.gallery = async (req, res) => {
     const type = req.query.type?req.query.type:null;
