@@ -8,7 +8,7 @@
             data-bt-override-class="{&quot;bt_bb_top_spacing_&quot;:{&quot;current_class&quot;:&quot;bt_bb_top_spacing_large&quot;,&quot;xxl&quot;:&quot;large&quot;,&quot;xl&quot;:&quot;large&quot;},&quot;bt_bb_bottom_spacing_&quot;:{&quot;current_class&quot;:&quot;bt_bb_bottom_spacing_large&quot;,&quot;xxl&quot;:&quot;large&quot;,&quot;xl&quot;:&quot;large&quot;}}">
             <div class="bt_bb_background_image_holder_wrapper">
                 <div class="bt_bb_background_image_holder btLazyLoadBackground bt_bb_parallax"
-                    data-background_image_src="../uploads/sites/2/2018/09/featured_image_blog.jpg"
+                    data-background_image_src="../uploads/sites/2/2018/09/blog.png"
                     data-parallax="0.7" data-parallax-offset="0" data-parallax-zoom-start="1" data-parallax-zoom-end="1"
                     data-parallax-blur-start="0" data-parallax-blur-end="0" data-parallax-opacity-start="1"
                     data-parallax-opacity-end="1"
@@ -99,7 +99,7 @@
                             <div class="btArticleContentHolder">
                                 <div class="btArticleMedia ">
                                     <div class="btMediaBox"><a
-                                            href="/blog/<%= data.title %>"
+                                            href="/blog/<%= data.title.replace(/ /g, '-') %>"
                                             title="Building Your Self Confidence"><img
                                                 src="../uploads/<%= data.imageUrl %>"
                                                 alt="Building Your Self Confidence" /></a></div>
@@ -111,38 +111,28 @@
                                             data-bt-override-class="{}">
                                             <div class="bt_bb_headline_superheadline_outside"><span
                                                     class="bt_bb_headline_superheadline"><span class="btArticleCategories"><a
-                                                            href="/blog/<%= data.title %>"
+                                                            href="/blog/<%= data.title.replace(/ /g, '-') %>"
                                                             class="btArticleCategory anxiety">Threapy</a></span></span></div>
                                             <h2 class="bt_bb_headline_tag"><span class="bt_bb_headline_content"><span><a
-                                                            href="/blog/<%= data.title %>"
+                                                            href="/blog/<%= data.title.replace(/ /g, '-') %>"
                                                             target="_self" title="Building Your Self Confidence"><%= data.title %></a></span></span></h2>
                                             <div class="bt_bb_headline_subheadline"><span class="btArticleDate"><%= data.createdAt.toLocaleDateString('en-US', { month: 'long', day: '2-digit', year: 'numeric' }) %>
                                             </span><span class="btArticleAuthor"><a
-                                                        href="/blog/<%= data.title %>"
+                                                        href="/blog/<%= data.title.replace(/ /g, '-') %>"
                                                         class="btArticleAuthorURL">by <%= data.author %></a></span><a
-                                                    href="/blog/<%= data.title %>"
+                                                    href="/blog/<%= data.title.replace(/ /g, '-') %>"
                                                     class="btArticleComments">2</a></div>
                                         </header>
                                     </div><!-- /btArticleHeadline -->
                                     <div class="btShareRow">
                                         <div
                                             class="bt_bb_icon btIcoFacebook bt_bb_style_filled bt_bb_size_xsmall bt_bb_shape_circle">
-                                            <a href="#"
+                                            <a href="https://www.facebook.com/swadesiayurvedahealthcare/"
                                                 target="_self" title="Share on Facebook" data-ico-fa="&#xf09a;"
                                                 class="bt_bb_icon_holder"></a></div>
                                         <div
-                                            class="bt_bb_icon btIcoTwitter bt_bb_style_filled bt_bb_size_xsmall bt_bb_shape_circle">
-                                            <a href="#"
-                                                target="_self" title="Share on Twitter" data-ico-fa="&#xf099;"
-                                                class="bt_bb_icon_holder"></a></div>
-                                        <div
-                                            class="bt_bb_icon btIcoLinkedin bt_bb_style_filled bt_bb_size_xsmall bt_bb_shape_circle">
-                                            <a href="#"
-                                                target="_self" title="Share on Linkedin" data-ico-fa="&#xf0e1;"
-                                                class="bt_bb_icon_holder"></a></div>
-                                        <div
                                             class="bt_bb_icon btIcoWhatsApp bt_bb_style_filled bt_bb_size_xsmall bt_bb_shape_circle">
-                                            <a href="#"
+                                            <a href="https://api.whatsapp.com/send?phone=6299826209"
                                                 target="_self" title="Share on WhatsApp" data-ico-fa="&#xf232;"
                                                 class="bt_bb_icon_holder"></a></div>
                                     </div><!-- /btShareRow -->
@@ -184,39 +174,29 @@
                                             data-bt-override-class="{}">
                                             <div class="bt_bb_headline_superheadline_outside"><span
                                                     class="bt_bb_headline_superheadline"><span class="btArticleCategories"><a
-                                                            href="/blog/<%= data.title %>"
+                                                            href="/blog/<%= data.title.replace(/ /g, '-') %>"
                                                             class="btArticleCategory skills">Skills</a></span></span></div>
                                             <h2 class="bt_bb_headline_tag"><span class="bt_bb_headline_content"><span><a
-                                                            href="/blog/<%= data.title %>"
+                                                            href="/blog/<%= data.title.replace(/ /g, '-') %>"
                                                             target="_self" title="How to Improve Your Parenting Skills">How to
                                                             Improve Your Parenting Skills</a></span></span></h2>
                                             <div class="bt_bb_headline_subheadline"><span class="btArticleDate">January 10,
                                                     2018</span><span class="btArticleAuthor"><a
-                                                        href="/blog/<%= data.title %>"
+                                                        href="/blog/<%= data.title.replace(/ /g, '-') %>"
                                                         class="btArticleAuthorURL">by BoldThemes</a></span><a
-                                                    href="/blog/<%= data.title %>"
+                                                    href="/blog/<%= data.title.replace(/ /g, '-') %>"
                                                     class="btArticleComments">3</a></div>
                                         </header>
                                     </div><!-- /btArticleHeadline -->
                                     <div class="btShareRow">
                                         <div
                                             class="bt_bb_icon btIcoFacebook bt_bb_style_filled bt_bb_size_xsmall bt_bb_shape_circle">
-                                            <a href="h"
+                                            <a href="https://www.facebook.com/swadesiayurvedahealthcare/"
                                                 target="_self" title="Share on Facebook" data-ico-fa="&#xf09a;"
                                                 class="bt_bb_icon_holder"></a></div>
                                         <div
-                                            class="bt_bb_icon btIcoTwitter bt_bb_style_filled bt_bb_size_xsmall bt_bb_shape_circle">
-                                            <a href=""
-                                                target="_self" title="Share on Twitter" data-ico-fa="&#xf099;"
-                                                class="bt_bb_icon_holder"></a></div>
-                                        <div
-                                            class="bt_bb_icon btIcoLinkedin bt_bb_style_filled bt_bb_size_xsmall bt_bb_shape_circle">
-                                            <a href=""
-                                                target="_self" title="Share on Linkedin" data-ico-fa="&#xf0e1;"
-                                                class="bt_bb_icon_holder"></a></div>
-                                        <div
                                             class="bt_bb_icon btIcoWhatsApp bt_bb_style_filled bt_bb_size_xsmall bt_bb_shape_circle">
-                                            <a href=""
+                                            <a href="https://api.whatsapp.com/send?phone=6299826209"
                                                 target="_self" title="Share on WhatsApp" data-ico-fa="&#xf232;"
                                                 class="bt_bb_icon_holder"></a></div>
                                     </div><!-- /btShareRow -->

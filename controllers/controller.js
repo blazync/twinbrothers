@@ -26,7 +26,7 @@ exports.services = async (req, res) => {
    try {
         let services;
         if (servicesname) {
-            services = await Services.findOne({ name: servicesname });
+            services = await Services.findOne({ name: servicesname.replace(/-/g, ' ') });
             if (!services) {
                 res.render('services');
             }
@@ -69,7 +69,7 @@ exports.blog = async (req, res) => {
    if(title){
     try {
         
-        const blog = await Blog.findOne({ title: title });
+        const blog = await Blog.findOne({ title: title.replace(/-/g, ' ') });
         if (!blog) {
             return res.status(404).send('Blog not found');
         }
