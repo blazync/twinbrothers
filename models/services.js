@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const userSchema = new Schema({
+const serviceSchema = new Schema({
   id: {
     type: Number,
     unique: true,
@@ -11,10 +11,20 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  slug:{
+    type:String,
+    required:true,
+    default:'#'
+  },
   description: {
     type: String,
     required: true
   },
+      imageUrl: {
+      type: String,
+      required: true,
+      default:'twin-bg-2.jpg'
+    },
   timestamps: {
     type: Date,
     default: Date.now
@@ -22,7 +32,7 @@ const userSchema = new Schema({
 });
 
 // Create a pre-save hook to auto-increment the ID
-userSchema.pre('save', async function (next) {
+serviceSchema.pre('save', async function (next) {
   if (!this.isNew) {
     return next();
   }
@@ -38,4 +48,4 @@ userSchema.pre('save', async function (next) {
     next(error);
   }
 });
-module.exports = mongoose.model('services', userSchema);
+module.exports = mongoose.model('services', serviceSchema);

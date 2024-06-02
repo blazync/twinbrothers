@@ -42351,11 +42351,11 @@ body:not(.bt_bb_fe_preview_toggle) .bt_bb_separator.bt_bb_top_spacing_100.bt_bb_
     font-weight: 400;
     display: block;
     margin-bottom: 1em;
-    font-size: .5em;
+    font-size: 3rem;
     }
 .bt_bb_superheadline_outside.bt_bb_headline .bt_bb_headline_superheadline,
 .bt_bb_headline_superheadline_outside .bt_bb_headline .bt_bb_headline_superheadline {
-    font-size: 1rem;
+    font-size: 3rem;
     }
 .bt_bb_superheadline_font_weight_normal.bt_bb_headline .bt_bb_headline_superheadline {
     font-weight: normal;

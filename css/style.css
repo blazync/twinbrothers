@@ -57,6 +57,9 @@
     padding: calc(.667em + 2px) calc(1.333em + 2px);
     text-decoration: none
 }
+.border-2 {
+  border-width: 2px;
+}
 
 .wp-block-button[style*=text-decoration] .wp-block-button__link {
     text-decoration: inherit
@@ -45936,6 +45939,9 @@ html[data-bt_bb_screen_resolution="xl"].bt_bb_backgroud_fixed_supported .bt_bb_p
     font-weight: 800;
     }
 .bt_bb_font_weight_900.bt_bb_button .bt_bb_button_text {
+    font-weight: 900;
+    }
+.bt_bb_font_weight_bold {
     font-weight: 900;
     }
 .bt_bb_text_transform_.bt_bb_button .bt_bb_button_text {

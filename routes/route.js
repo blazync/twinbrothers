@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path')
 const controller = require('../controllers/controller');
 const dashcontroller = require('../controllers/dashcontroller');
 const isAuthenticated = require('../middlewares/authentication');
@@ -9,7 +10,7 @@ const storage = multer.diskStorage({
     cb(null, 'public/uploads/'); // Specify the destination directory
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname); // Use the original file name
+     cb(null, Date.now() + path.extname(file.originalname)); // Use the original file name
   }
 });
 const upload = multer({ storage: storage });
@@ -21,7 +22,8 @@ router.post('/dashboard/embedgallery', isAuthenticated, upload.single('image'), 
 router.get('/', controller.index);
 router.get('/aboutus', controller.aboutus);
 router.get('/services', controller.services);
-router.get('/services/:servicesname', controller.services);
+router.get('/services/:slug', controller.services);
+router.get('/services/:service/:category', controller.category);
 router.get('/contact', controller.contact);
 router.post('/contact', controller.contactform);
 router.get('/blog/', controller.blog);
@@ -44,9 +46,16 @@ router.post('/dashboard/edituser',isAuthenticated, dashcontroller.editUser);
 
 router.get('/dashboard/addservices',isAuthenticated, dashcontroller.addservices);
 router.get('/dashboard/editservices',isAuthenticated, dashcontroller.editservices);
-router.post('/dashboard/embedservice',isAuthenticated, dashcontroller.embedservice);
+router.post('/dashboard/embedservice',upload.single('imageUrl'),isAuthenticated, dashcontroller.embedservice);
 router.get('/dashboard/deleteservices',isAuthenticated, dashcontroller.deleteservices);
 router.get('/dashboard/services', isAuthenticated,dashcontroller.services);
+
+
+router.get('/dashboard/addcategory',isAuthenticated, dashcontroller.addcategory);
+router.get('/dashboard/editcategory',isAuthenticated, dashcontroller.editcategory);
+router.post('/dashboard/embedcategory',upload.single('imageUrl'),isAuthenticated, dashcontroller.embedcategory);
+router.get('/dashboard/deletecategory',isAuthenticated, dashcontroller.deletecategory);
+router.get('/dashboard/category/', isAuthenticated,dashcontroller.category);
 
 router.get('/dashboard/gallery/', isAuthenticated,dashcontroller.gallery);
 router.get('/dashboard/addgalleryimage/', isAuthenticated,dashcontroller.addgalleryimage);

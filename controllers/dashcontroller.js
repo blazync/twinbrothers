@@ -6,12 +6,11 @@ const Enquiry = require('../models/enquiry');
 const Gallery = require('../models/gallery.js');
 const Services = require('../models/services');
 const bcrypt = require('bcrypt');
+const Category = require('../models/category.js');
 const mailer = require('../controllers/mailcontroller');
 const generatePassword = require('generate-password');
 const { uploadImage } = require('./uploadImage');
 const path = require('path');
-
-
 
 exports.dashboard = async (req, res) => {
   // Check if session is active
@@ -147,13 +146,20 @@ exports.embedservice = async (req, res) => {
     const type = req.body.type;
     if (type === 'add') {
       const type = req.body.type;
-      const { name ,description } = req.body;
-      const newService = new Services({ name,description });
+      const { name ,slug,description } = req.body;
+      const filepath = req.file ? path.basename(req.file.path) : null;
+           if (!filepath) {
+        throw new Error('File upload failed');
+      }
+      const newService = new Services({ name,description,slug,imageUrl:filepath });
       await newService.save();
       res.redirect('/dashboard/services');      
     } else {
       const serviceId = req.query.id;
-      const service = await Services.findByIdAndUpdate(serviceId, req.body, { new: true });
+      const filepath = req.file ? path.basename(req.file.path) : null;
+const updateData = req.file ? { imageUrl: filepath, ...req.body } : { ...req.body };
+const service = await Services.findByIdAndUpdate(serviceId, updateData, { new: true });
+
       if (!service) {
         return res.status(404).send('Service not found');
       }
@@ -166,6 +172,74 @@ exports.embedservice = async (req, res) => {
   }
 };
 
+exports.category = async (req, res) => {
+  const category = await Category.find();
+    res.render('dashboard/category',{ category });
+
+}
+exports.addcategory = async (req, res) => {
+  const underServices = await Services.find();
+    if (!underServices) {
+      return res.status(404).send('UnderService not found');
+    }
+
+  res.render('dashboard/embedCategory',{type:'add',category:'',underServices });
+}
+exports.deletecategory = async (req, res) => {
+  try {
+    const categoryId = req.query.categoryId;
+    await Category.findByIdAndDelete(categoryId);
+    res.redirect('/dashboard/category');
+  } catch (error) {
+    console.error('Error deleting category:', error);
+    res.status(500).send('An error occurred while deleting the category.');
+  }
+};
+
+exports.editcategory = async (req, res) => {
+  try {
+      const underServices = await Services.find();
+    if (!underServices) {
+      return res.status(404).send('UnderService not found');
+    }
+    const categoryId = req.query.categoryId;
+    const category = await Category.findById(categoryId);
+    if (!category) {
+      return res.status(404).send('categoryId not found');
+    }
+    res.render('dashboard/embedcategory', { type: 'edit', category,categoryId ,underServices});
+  } catch (error) {
+    console.error('Error fetching category:', error);
+    res.status(500).send('An error occurred while fetching category.');
+  }
+}
+exports.embedcategory = async (req, res) => {
+  try {
+    const type = req.body.type;
+    if (type === 'add') {
+      const type = req.body.type;
+      const filepath = req.file ? path.basename(req.file.path) : null;
+      const { name,description,slug,underServiceId } = req.body;
+      const newcategory  = new Category ({ name,description,slug,underService: underServiceId,imageUrl:filepath });
+      await newcategory .save();
+      res.redirect('/dashboard/category');      
+    } else {
+      const categoryId = req.query.categoryId;
+       const filepath = req.file ? path.basename(req.file.path) : null;
+const updateData = req.file ? { imageUrl: filepath, ...req.body } : { ...req.body };
+
+const category = await Category.findByIdAndUpdate(categoryId, updateData, { new: true });
+      if (!category) {
+        return res.status(404).send('Service not found');
+      }
+      res.redirect('/dashboard/category'); 
+      }
+  } catch (error) {
+    // Handle errors
+    console.error('Error fetching service:', error);
+    res.status(500).send('An error occurred while fetching service.');
+  }
+};
 
 
 
@@ -403,13 +477,13 @@ exports.embedblog = async (req, res) => {
           }
       } else {
           const blogId = req.query.id;
-          const updatedBlog = await Blog.findByIdAndUpdate(blogId, req.body, { new: true });
+          const updatedBlog = await Blog.findByIdAndUpdate(blogId, {imageUrl: req.file ? path.basename(req.file.path) : null,...req.body}, { new: true });
           
           if (!updatedBlog) {
               return res.status(404).send('Blog post not found');
           }
           
-          res.redirect('/dashboard/gallery');
+          res.redirect('/dashboard/blog');
       }
   } catch (error) {
       // Handle errors

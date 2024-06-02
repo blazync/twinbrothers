@@ -1,5 +1,6 @@
 const Enquiry = require('../models/enquiry');
 const Services = require('../models/services');
+const Category = require('../models/category.js')
 const Testimonial = require('../models/testimonial');
 const Gallery = require('../models/gallery');
 const Blog = require('../models/blog');
@@ -22,13 +23,14 @@ exports.gallery = async (req, res) => {
 }
 
 exports.services = async (req, res) => {
-    const servicesname = req.params.servicesname;
+    const slug = req.params.slug;
+    console.log(slug)
    try {
         let services;
-        if (servicesname) {
-            services = await Services.findOne({ name: servicesname.replace(/-/g, ' ') });
+        if (slug) {
+            services = await Services.findOne({ slug: slug});
             if (!services) {
-                res.render('services');
+                return res.redirect('/services');
             }
             res.render('servicesdetails', { service: services });
         } else {
@@ -37,9 +39,40 @@ exports.services = async (req, res) => {
         }
     } catch (error) {
         console.error('Error fetching services:', error);
+        return res.redirect('/services');
         res.status(500).render('error');
     }
 };
+exports.category = async (req, res) => {
+    const { service, category } = req.params;
+    try {
+        if (!service || !category) {
+            // If either service or category is missing, redirect to the services page
+            return res.redirect('/services');
+        }
+
+        // Check if the service exists
+        const foundService = await Services.findOne({ slug: service });
+        if (!foundService) {
+            // If the service does not exist, redirect to the services page
+            return res.redirect('/services');
+        }
+        // Check if the category exists
+        const foundCategory = await Category.findOne({ slug: category });
+        if (!foundCategory) {
+            // If the category does not exist, redirect to the services page
+            return res.redirect('/services');
+        }
+
+        // If both service and category exist, render the service details page
+        return res.render('category', { service: foundService, category: foundCategory });
+    } catch (error) {
+        console.error('Error fetching services:', error);
+        // If an error occurs, redirect to the services page
+        return res.redirect('/services');
+    }
+};
+
 
 exports.contact = async (req, res) => {
     res.render('contact');
