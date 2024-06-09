@@ -10,6 +10,7 @@ const Category = require('../models/category.js');
 const mailer = require('../controllers/mailcontroller');
 const generatePassword = require('generate-password');
 const { uploadImage } = require('./uploadImage');
+const Ad = require('../models/ads.js');
 const path = require('path');
 
 exports.dashboard = async (req, res) => {
@@ -50,6 +51,8 @@ exports.editUser = async (req, res) => {
       }
       res.render('dashboard/embedUser', { users: user, type:'edit' });
 };
+
+
 
 exports.embedUser = async (req, res) => {
   try {
@@ -111,6 +114,7 @@ exports.services = async (req, res) => {
   const services = await Services.find();
   res.render('dashboard/services',{ services });
 }
+
 exports.addservices = async (req, res) => {
   const enquiries = await Enquiry.find();
   res.render('dashboard/embedservices',{ enquiries,type:'add',service:'' });
@@ -491,6 +495,38 @@ exports.embedblog = async (req, res) => {
       res.status(500).send('An error occurred');
   }
 };
+
+exports.ads = async (req, res) => {
+  const ads = await Ad.find();
+  res.render('dashboard/ads',{ ads });
+}
+exports.embedads = async (req, res) => {
+  const id = req.query.id;
+  const { name } = req.body;
+  try {
+    const ad = await Ad.findById(id);
+    if (!ad) {
+      return res.status(404).send('Ad not found');
+    }
+    ad.name = name;
+    ad.imageUrl = req.file ? path.basename(req.file.path) : null;;
+    await ad.save();
+    res.redirect('/dashboard/ads')
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
+}
+
+exports.editads = async (req, res) => {
+  const Id = req.query.id;
+    const ads = await Ad.findById(Id);
+    if (!ads) {
+      return res.status(404).send('ads not found');
+    }
+    res.render('dashboard/embedads', { ads, type: 'edit', });
+}
+
 
   
 module.exports = exports;

@@ -36,55 +36,34 @@
                             <li id="menu-item-44"
                                 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-7 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-44">
                                 <a href="/services" aria-current="page">Services</a>
-                                <ul class="sub-menu">
-                                    <li id="menu-item-1855"
-                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1855">
-                                        <a href="/services/sports-massage-therapy">Sports Massage Therapy</a>
-                                    </li>
-                            </li>
-                            <li id="menu-item-1855"
-                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1855">
-                                <a href="/services/baby-massage-therapy">Baby Massage Therapy (Above 3 Years)</a>
-                            </li>
-
-                            <li id="menu-item-1855"
-                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1855">
-                                <a href="#">Cupping Therapy</a>
-                                <ul class="sub-menu">
-                                    <li id="menu-item-1856"
-                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1856">
-                                        <a href="/services/cupping-therapy/dry-cupping-therapy">Dry Cupping</a>
-                                    </li>
-                                    <li id="menu-item-1857"
-                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1857">
-                                        <a href="/services/cupping-therapy/fire-cupping-therapy">Fire Cupping</a>
-                                    </li>
-                                    <li id="menu-item-1858"
-                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1858">
-                                        <a href="/services/cupping-therapy/wet-cupping-therapy">Wet Cupping</a>
-                                    </li>
+                                <ul>
+                                    <% service.forEach(function(data) { %>
+                                        <li id="menu-item-<%= data.id %>" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-<%= data.id %>">
+                                            <a href="/services/<%= data.slug %>"><%= data.name %></a>
+                                            <ul class="sub-menu"> <!-- Move the ul tag outside the loop -->
+                                                <% category.forEach(function(categoryItem) { %>
+                                                    <% if (categoryItem.underService.toString() === data._id.toString()) { %>
+                                                        <li id="menu-item-<%= categoryItem.id %>" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-<%= categoryItem.id %>">
+                                                            <a href="/category?service=<%= data.slug %>&category=<%= categoryItem.slug %>"><%= categoryItem.name %></a>
+                                                        </li>
+                                                    <% } %>
+                                                <% }); %>
+                                            </ul>
+                                        </li>
+                                    <% }); %>
                                 </ul>
-                            <li id="menu-item-1855"
-                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1855">
-                                <a href="/services/sound-healing-therapy">Sound Healing Therapy</a>
+                                
+                                
+                                
+                                
                             </li>
-                            <li id="menu-item-1855"
-                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1855">
-                                <a href="/services/stretching-and-mobility-therapy">Stretching and Mobility Session</a>
-                            </li>
-                            <li id="menu-item-1855"
-                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1855">
-                                <a href="/services/iastm-therapy">IASTM Therapy</a>
-                            </li>
-                            <li id="menu-item-1855"
-                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1855">
-                                <a href="/services/ayurved-therapy">Ayurved Therapy</a>
-                            </li>
-                            </li>
+                            
+
+                           
 
 
 
-                        </ul>
+                        
 
                         <!-- <li id="menu-item-43" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-43">
                                 <a href="/services">Services</a>

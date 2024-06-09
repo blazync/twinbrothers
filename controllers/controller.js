@@ -4,27 +4,32 @@ const Category = require('../models/category.js')
 const Testimonial = require('../models/testimonial');
 const Gallery = require('../models/gallery');
 const Blog = require('../models/blog');
+const Ad = require('../models/ads.js');
 const mailer = require('../controllers/mailcontroller');
 
 exports.index = async (req, res) => {
     const services = await Services.find();
+    const category = await Category.find();
     const blog = await Blog.find();
     const testimonial = await Testimonial.find();
-    res.render('index', { service: services,blog,testimonial });
+    res.render('index', { service: services,category,blog,testimonial,Ads: await Ad.findOne() });
 }
 exports.aboutus = async (req, res) => {
+    const category = await Category.find();
     const services = await Services.find();
-    res.render('about',{services});
+    res.render('about',{services,service:services,category,Ads: await Ad.findOne()});
 }
 exports.gallery = async (req, res) => {
+    const services = await Services.find();
+    const category = await Category.find();
     const type = req.query.type?req.query.type:null;
     const gallery = await Gallery.find();
-    res.render('gallery',{ gallery,type });
+    res.render('gallery',{ gallery,type,service:services,category,Ads: await Ad.findOne() });
 }
 
 exports.services = async (req, res) => {
     const slug = req.params.slug;
-    console.log(slug)
+    const category = await Category.find();
    try {
         let services;
         if (slug) {
@@ -32,50 +37,56 @@ exports.services = async (req, res) => {
             if (!services) {
                 return res.redirect('/services');
             }
-            res.render('servicesdetails', { service: services });
+            res.render('servicesdetails', { servicedata: services,service:await Services.find(),category,Ads: await Ad.findOne() });
         } else {
             services = await Services.find();
-            res.render('services', { service: services });
+            
+            res.render('services', { service: services,category,Ads: await Ad.findOne() });
         }
     } catch (error) {
+        const services = await Services.find();
+    const category = await Category.find();
         console.error('Error fetching services:', error);
-        return res.redirect('/services');
+        return res.redirect('/services',{service:services,category,Ads: await Ad.findOne()});
         res.status(500).render('error');
     }
 };
 exports.category = async (req, res) => {
-    const { service, category } = req.params;
+    const { service,category } = req.query;
+    
     try {
         if (!service || !category) {
             // If either service or category is missing, redirect to the services page
-            return res.redirect('/services');
+            return res.redirect('/services',{category:await Category.find(),service:await Services.find()});
         }
 
         // Check if the service exists
         const foundService = await Services.findOne({ slug: service });
         if (!foundService) {
             // If the service does not exist, redirect to the services page
-            return res.redirect('/services');
+            return res.redirect('/services',{category:await Category.find(),service:await Services.find(),Ads: await Ad.findOne()});
         }
         // Check if the category exists
         const foundCategory = await Category.findOne({ slug: category });
         if (!foundCategory) {
             // If the category does not exist, redirect to the services page
-            return res.redirect('/services');
+            return res.redirect('/services',{category:await Category.find(),service:await Services.find(),Ads: await Ad.findOne()});
         }
 
         // If both service and category exist, render the service details page
-        return res.render('category', { service: foundService, category: foundCategory });
+        return res.render('servicessubdetails', { service: foundService, categorydata: foundCategory,category:await Category.find(),service:await Services.find(),Ads: await Ad.findOne() });
     } catch (error) {
         console.error('Error fetching services:', error);
         // If an error occurs, redirect to the services page
-        return res.redirect('/services');
+        return res.redirect('/services',{category:await Category.find(),service:await Services.find(),Ads: await Ad.findOne()});
     }
 };
 
 
 exports.contact = async (req, res) => {
-    res.render('contact');
+    const services = await Services.find();
+    const category = await Category.find();
+    res.render('contact',{service:services,category,Ads: await Ad.findOne()});
 }
 exports.contactform = async (req, res) => {
     const data = req.body;
@@ -106,14 +117,16 @@ exports.blog = async (req, res) => {
         if (!blog) {
             return res.status(404).send('Blog not found');
         }
-        res.render('blogview', { blog });
+        res.render('blogview', { blog,Ads: await Ad.findOne(),category:await Category.find(),service:await Services.find() });
     } catch (error) {
         console.error('Error fetching blog:', error);
         res.status(500).send('An error occurred while fetching the blog.');
     }
    }else{
+    const services = await Services.find();
+    const category = await Category.find();
     const blog = await Blog.find();
-        res.render('blog', { blog });
+        res.render('blog', { blog,service:services,category,Ads: await Ad.findOne() });
    }
 };
 
@@ -122,7 +135,9 @@ exports.login = async (req, res) => {
         // Session is active, render dashboard
         res.redirect('dashboard');
     } else {
-        res.render('login');
+        const services = await Services.find();
+    const category = await Category.find();
+        res.render('login',{service:services,category,Ads: await Ad.findOne()});
     }
 }
 exports.lostpassword = async (req, res) => {

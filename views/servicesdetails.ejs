@@ -45,7 +45,7 @@
                                                             <h1 class="bt_bb_headline_tag"><span
                                                                     class="bt_bb_headline_content"><span
                                                                         style="text-transform: capitalize;">
-                                                                        <%= service.name %> <i><u>Service</u></i>
+                                                                        <%= servicedata.name %> <i><u>Service</u></i>
                                                                     </span></span></h1>
                                                         </header>
                                                         <div class="bt_bb_separator_v2 bt_bb_border_style_none bt_bb_top_spacing_none bt_bb_bottom_spacing_normal bt_bb_icon_size_normal bt_bb_text_size_normal bt_bb_separator_v2_without_content"
@@ -143,7 +143,7 @@
                                                             </div>
                                                             <h2 class="bt_bb_headline_tag"><span
                                                                     class="bt_bb_headline_content"><span>
-                                                                        <%= service.name %>
+                                                                        <%= servicedata.name %>
                                                                             <i><u>Description</u></i>
                                                                     </span></span></h2>
                                                         </header>
@@ -156,6 +156,7 @@
                                                                         class="bt_bb_icon_holder"></span></span><span
                                                                     class="bt_bb_separator_v2_inner_after"></span></div>
                                                         </div>
+                                                        <img src="../uploads/<%= servicedata.imageUrl %>" alt="" srcset="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -163,7 +164,7 @@
                                     </div>
                                     <div class="bt_bb_row_wrapper">
                                         <p style="font-size: 30px;text-align:justify">
-                                            <%- service.description %>
+                                            <%- servicedata.description %>
                                         </p>
                                     </div>
                                 </div><!-- cell_inner -->

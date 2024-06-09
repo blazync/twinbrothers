@@ -1,7 +1,5 @@
 <%- include('includes/head') %>
-    <style>
-
-    </style>
+    
     <div class="bt-content-wrap btClear">
         <div class="bt-content-holder">
 
@@ -717,66 +715,84 @@
                                                     <div class="bt_bb_column_content_inner">
                                                         <div
                                                             class="bt_bb_accordion bt_bb_style_simple bt_bb_shape_square">
-                                                            <div class="bt_bb_accordion_item">
-                                                                <div class="bt_bb_accordion_item_title"><span
-                                                                        class="bt_bb_accordion_item_title_inner">What
-                                                                        certifications do your therapists have?</span>
-                                                                </div>
-                                                                <div class="bt_bb_accordion_item_content">
-                                                                    <div class="bt_bb_text">
-                                                                        <p>Our therapists are certified by SAI NSNIS
-                                                                            Patiala, Punjab, and have specialized
-                                                                            training in various therapeutic
-                                                                            techniques, including IASTM, cupping
-                                                                            therapy, Ayurveda, and sound healing.</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="bt_bb_accordion_item">
-                                                                <div class="bt_bb_accordion_item_title"><span
-                                                                        class="bt_bb_accordion_item_title_inner">How do
-                                                                        I book a session?</span>
-                                                                </div>
-                                                                <div class="bt_bb_accordion_item_content">
-                                                                    <div class="bt_bb_text">
-                                                                        <p>You can book a session by calling us at +91
-                                                                            6299826209, emailing us at
-                                                                            lav6066@gmail.com, or using our
-                                                                            online booking system available on our
-                                                                            website.</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="bt_bb_accordion_item">
-                                                                <div class="bt_bb_accordion_item_title"><span
-                                                                        class="bt_bb_accordion_item_title_inner">What
-                                                                        types of therapy do you offer?</span></div>
-                                                                <div class="bt_bb_accordion_item_content">
-                                                                    <div class="bt_bb_text">
-                                                                        <p>We offer a wide range of therapies including
-                                                                            sports massage therapy, IASTM, cupping
-                                                                            therapy (dry cupping, fire cupping,
-                                                                            hijama), Ayurveda therapy, sound healing
-                                                                            therapy, and baby massage therapy.</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="bt_bb_accordion_item">
-                                                                <div class="bt_bb_accordion_item_title"><span
-                                                                        class="bt_bb_accordion_item_title_inner">What
-                                                                        should I expect during my first visit?</span>
-                                                                </div>
-                                                                <div class="bt_bb_accordion_item_content">
-                                                                    <div class="bt_bb_text">
-                                                                        <p>During your first visit, we will conduct a
-                                                                            thorough consultation to assess your needs
-                                                                            and goals. Based on this
-                                                                            assessment, we will create a personalized
-                                                                            treatment plan tailored to your specific
-                                                                            requirements.</p>
-                                                                    </div>
+                                                            <style>
+                                                                
+                                                                .accordion-container {
+                                                                    max-width: 800px;
+                                                                    margin: 0 auto;
+                                                                }
+                                                                .accordion-item {
+                                                                    border-radius: 5px;
+                                                                    overflow: hidden;
+                                                                    margin-bottom: 10px;
+                                                                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                                                                    background-color: #fff;
+                                                                }
+                                                                .accordion-item input[type="checkbox"] {
+                                                                    display: none;
+                                                                }
+                                                                .accordion-item label {
+                                                                    display: block;
+                                                                    cursor: pointer;
+                                                                    padding: 15px 20px;
+                                                                    background-color: #FF9245;
+                                                                    color: #fff;
+                                                                    font-weight: bold;
+                                                                    position: relative;
+                                                                    transition: background-color 0.3s ease;
+                                                                }
+                                                                .accordion-item label:hover {
+                                                                    background-color: #FF9245;
+                                                                }
+                                                                .accordion-item label:before {
+                                                                    content: '\002B';
+                                                                    font-size: 24px;
+                                                                    position: absolute;
+                                                                    right: 20px;
+                                                                    transition: transform 0.3s ease;
+                                                                }
+                                                                .accordion-item input[type="checkbox"]:checked + label:before {
+                                                                    transform: rotate(45deg);
+                                                                }
+                                                                .accordion-item .accordion-content {
+                                                                    display: none;
+                                                                    padding: 15px 20px;
+                                                                    border-top: 1px solid #ddd;
+                                                                    background-color: #fff;
+                                                                }
+                                                                .accordion-item input[type="checkbox"]:checked ~ .accordion-content {
+                                                                    display: block;
+                                                                }
+                                                            </style>
+                                                            <div class="accordion-item">
+                                                                <input type="checkbox" id="accordion-1">
+                                                                <label for="accordion-1">How do I book a session?</label>
+                                                                <div class="accordion-content">
+                                                                    <p>You can book a session by calling us at +91 6299826209, emailing us at lav6066@gmail.com, or using our online booking system available on our website.</p>
                                                                 </div>
                                                             </div>
+                                                            <div class="accordion-item">
+                                                                <input type="checkbox" id="accordion-2">
+                                                                <label for="accordion-2">What types of therapy do you offer?</label>
+                                                                <div class="accordion-content">
+                                                                    <p>We offer a wide range of therapies including sports massage therapy, IASTM, cupping therapy (dry cupping, fire cupping, hijama), Ayurveda therapy, sound healing therapy, and baby massage therapy.</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="accordion-item">
+                                                                <input type="checkbox" id="accordion-3">
+                                                                <label for="accordion-3">What should I expect during my first visit?</label>
+                                                                <div class="accordion-content">
+                                                                    <p>During your first visit, we will conduct a thorough consultation to assess your needs and goals. Based on this assessment, we will create a personalized treatment plan tailored to your specific requirements.</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="accordion-item">
+                                                                <input type="checkbox" id="accordion-4">
+                                                                <label for="accordion-4">What certifications do your therapists have?</label>
+                                                                <div class="accordion-content">
+                                                                    <p>Our therapists are certified by SAI NSNIS Patiala, Punjab, and have specialized training in various therapeutic techniques, including IASTM, cupping therapy, Ayurveda, and sound healing.</p>
+                                                                </div>
+                                                            </div>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
@@ -843,17 +859,17 @@
                                                         data-bt-override-class="{&quot;bt_bb_align_&quot;:{&quot;current_class&quot;:&quot;bt_bb_align_left&quot;,&quot;xxl&quot;:&quot;left&quot;,&quot;xl&quot;:&quot;left&quot;}}">
 
 
-                                                        <div class="bt_bb_column_content border-2" data-aos="flip-left">
+                                                        <div class="bt_bb_column_content border-2" style="margin: 4px" data-aos="flip-left">
                                                             <div class="bt_bb_column_content_inner">
                                                                 <div class="bt_bb_service bt_bb_color_scheme_7 bt_bb_style_borderless bt_bb_size_small bt_bb_shape_circle bt_bb_align_inherit"
                                                                     style="; --service-primary-color:#469baf; --service-secondary-color:#2b2c2e;"
                                                                     data-bt-override-class="{&quot;bt_bb_size_&quot;:{&quot;current_class&quot;:&quot;bt_bb_size_small&quot;,&quot;xxl&quot;:&quot;small&quot;,&quot;xl&quot;:&quot;small&quot;},&quot;bt_bb_align_&quot;:{&quot;current_class&quot;:&quot;bt_bb_align_inherit&quot;,&quot;xxl&quot;:&quot;inherit&quot;,&quot;xl&quot;:&quot;inherit&quot;}}">
-                                                                    <div class=""><img data-aos="flip-left"
+                                                                    <div class=""><img style="max-height: 300px" data-aos="flip-left"
                                                                             src="/uploads/<%= service.imageUrl %>"
-                                                                            alt="" style="border-radius: 5px; ">
+                                                                            alt="" style="border-radius: 5px; " >
                                                                     </div>
-                                                                    <span data-ico-remixiconsbusiness="&#xe99b;"
-                                                                        class="bt_bb_icon_holder"></span>
+                                                                    <!-- <span data-ico-remixiconsbusiness="&#xe99b;"
+                                                                        class="bt_bb_icon_holder"></span> -->
                                                                     <div class="bt_bb_service_content">
                                                                         <div class="bt_bb_service_content_title">
                                                                             <%= service.name %>

@@ -23,7 +23,7 @@ router.get('/', controller.index);
 router.get('/aboutus', controller.aboutus);
 router.get('/services', controller.services);
 router.get('/services/:slug', controller.services);
-router.get('/services/:service/:category', controller.category);
+router.get('/category', controller.category);
 router.get('/contact', controller.contact);
 router.post('/contact', controller.contactform);
 router.get('/blog/', controller.blog);
@@ -71,5 +71,9 @@ router.get('/dashboard/deleteblog',isAuthenticated, dashcontroller.deleteblog);
 router.get('/dashboard/servicesenquiry', isAuthenticated,dashcontroller.servicesenquiry);
 router.get('/dashboard/contact', isAuthenticated,dashcontroller.contact);
 
+
+router.get('/dashboard/ads', isAuthenticated,dashcontroller.ads);
+router.get('/dashboard/editads',isAuthenticated, dashcontroller.editads);
+router.post('/dashboard/embedads',upload.single('imageUrl'),isAuthenticated, dashcontroller.embedads);
 
 module.exports = router;

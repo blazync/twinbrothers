@@ -1,0 +1,163 @@
+<style>
+  body {
+      font-family: Arial, sans-serif;
+  }
+
+  .popup {
+  z-index: 9999999 ;
+      display: none; /* Hidden by default */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px solid #ccc;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.9) ;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+  
+  }
+
+  .popup img {
+      max-width: 100%;
+      max-height: 620px;
+  }
+
+  .popup .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      font-size: 20px;
+      color: #333;
+  }
+</style>
+<style>
+  #loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  flex-direction: column;
+
+  transition: opacity 0.5s ease;
+}
+
+#loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+  
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+  
+    .spinner-container {
+  position: relative;
+  width: 6rem;
+  height: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner-border {
+  position: absolute;
+  width: 6rem;
+  height: 6rem;
+  border: 0.3em solid #FF9245;
+  border-right-color: transparent;
+  border-radius: 100%;
+  padding: 50px;
+  animation: spinner-border 0.75s linear infinite;
+}
+
+  
+.spinner-container img {
+  position: absolute;
+}
+
+.loader-text {
+  margin-top: 20px;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+/* Spinner Animation */
+@keyframes spinner-border {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+    /* Subtle Background Animation */
+    @keyframes fadeBackground {
+      0% { background-color: rgba(255, 255, 255, 0.9); }
+      50% { background-color: rgba(240, 240, 240, 0.9); }
+      100% { background-color: rgba(255, 255, 255, 0.9); }
+    }
+  
+    #loader {
+      animation: fadeBackground 3s infinite;
+    }
+  </style>
+<div id="loader">
+  <div class="spinner-container">
+      <div class="spinner-border text-primary" role="status"></div>
+      <img src="../../twinbrotherslogo.png" alt="Logo">
+  </div>
+  <div class="loader-text">Loading, please wait...</div>
+</div>
+
+<div id="popup" class="popup">
+  <span class="close" onclick="closePopup()">&times;</span>
+  <img src="../../uploads/<%= Ads.imageUrl %>" alt="Welcome Image">
+</div>
+<script>
+  function setCookie(name, value, minutes) {
+      let expires = "";
+      if (minutes) {
+          let date = new Date();
+          date.setTime(date.getTime() + (minutes * 60 * 1000));
+          expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+
+  function getCookie(name) {
+      let nameEQ = name + "=";
+      let ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+  }
+
+  function closePopup() {
+      const popup = document.getElementById('popup');
+      popup.style.display = 'none';
+  }
+
+  function showPopup() {
+      const popup = document.getElementById('popup');
+      popup.style.display = 'block';
+  }
+
+  window.addEventListener('load', () => {
+      const loader = document.getElementById('loader');
+      loader.style.display = 'none';
+
+      if (!getCookie('popupShown')) {
+          showPopup(); // Show the popup if the cookie does not exist
+          setCookie('popupShown', 'true', 10); // Set the cookie to expire in 10 minutes
+      }
+  });
+</script>
+  
